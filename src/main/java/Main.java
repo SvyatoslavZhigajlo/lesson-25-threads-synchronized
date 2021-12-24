@@ -21,7 +21,19 @@ public class Main {
         pointBMovingSynchronizeLock1(xStart, yStart);
         pointBMovingSynchronizeLock2(xStart, yStart);
         pointBMovingSynchronizeX(xStart, yStart);
+        /*
+        ДЗ 27 Задание 2 - Создать и запустить поток для вычисления N-го числа Фибоначчи, наследуя класс Thread.
+         */
         fibonacciThread();
+
+        /*
+        ДЗ 27 Задание 3 - Создать и запустить поток для вычисления N-го числа Фибоначчи, используя класс Runnable.
+         */
+        fibonacciRunnable();
+        /*
+        ДЗ 27 Задание 4 - Реализовать прерывание потоков из заданий выше через 3 секунды. Вывести результаты
+        после завершения всех потоков с отметкой прерванных вычислений.
+         */
     }
 
     private void pointAMovingSynchronize(int xStart, int yStart) {
@@ -109,9 +121,24 @@ public class Main {
         thread.start();
         try {
             thread.join();
-            System.out.println("Fibonacci " + thread.current);
+            thread.interrupt();
+            System.out.println("Fibonacci Thread " + thread.current);
         } catch (InterruptedException ignored) {
         }
     }
+
+    private void fibonacciRunnable() {
+        FibonacciRunnable fibonacciRunnable = new FibonacciRunnable(10000);
+        Thread thread = new Thread(fibonacciRunnable);
+        thread.start();
+        try{
+            thread.join(3000);
+            thread.interrupt();
+            System.out.println("Fibonacci Runnable " + fibonacciRunnable.current);
+        } catch (InterruptedException ignored) {
+        }
+
+    }
+
 
 }

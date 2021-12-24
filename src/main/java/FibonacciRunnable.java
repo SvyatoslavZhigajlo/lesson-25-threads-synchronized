@@ -1,12 +1,11 @@
 import java.math.BigInteger;
 
-public class FibonacciThread extends Thread {
-
+public class FibonacciRunnable implements Runnable{
     public BigInteger current = BigInteger.valueOf(1);
     public BigInteger previous = BigInteger.valueOf(0);
     public int fibonacci;
 
-    public FibonacciThread(int fibonacci){
+    public FibonacciRunnable(int fibonacci){
         this.fibonacci = fibonacci;
     }
 
